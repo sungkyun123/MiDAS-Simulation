@@ -14,8 +14,6 @@ The simulation of MiDAS is implemented by C++.
 
 You can evaluate the WAF of MiDAS with the simulator and trace files.
 
-The MiDAS algorithm is implemented in the directory `model.cpp`.
-
 
 ### Prerequisites
 The hardware/software requirements for executing MiDAS are as followed.
@@ -26,7 +24,7 @@ The hardware/software requirements for executing MiDAS are as followed.
 
 
 #### Software
-There are special requirements to run the simulation.
+There are no special software requirements to run the simulation.
 
 
 ### Installation & Compilation
