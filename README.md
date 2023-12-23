@@ -3,7 +3,7 @@
 ## What is MiDAS?
 MiDAS is a Migration-based Data placement technique with Adaptive group number and Size configuration for log-structured systems.
 
-MiDAS is implemented in both **trace-driven simulation** and a **real SSD prototype**. The simulator is used to quickly evaluate WAF of the GC techniques. Also, we used a real SSD prototype to measure I/O performance and the overheads associated with the CPU and memory for system execution.
+MiDAS is implemented in both **trace-driven simulation** and a **real SSD prototype**. The simulator is used to quickly evaluate WAF of the GC techniques. Also, we used a real SSD prototype to measure I/O performance and the overheads associated with the CPU and memory for system execution. You can check the MiDAS's code of the real SSD prototype in the following link (link). 
 
 The original paper that introduced MiDAS is currently in the revision stage of [USENIX FAST 2024](https://www.usenix.org/conference/fast24).
 
@@ -32,7 +32,7 @@ There are special requirements to run the simulation.
 ### Installation & Compilation
 * Clone required reopsitory (MiDAS SSD prototype) into your host machine.
 ```
-$ git clone ~
+$ git clone git@github.com:sungkyun123/MiDAS-Simulation.git
 $ cd MiDAS
 ```
 
@@ -46,7 +46,7 @@ $ wget https://zenodo.org/record/10409599/files/test-fio-small
 After downloading trace file, you can test MiDAS. This experiment may be finished in 5 minutes by your server environment. The trace file is suitable for 8GB device.
 
 * Smaller FIO Zipfian 1.0 workload (filename: test-fio-small)
-   * You need 8GB size of DRAM to test this trace file.
+   * You need about 80MB size of DRAM to test this trace file.
 ```
 $ make clean; make
 $ ./ssdsimul {trace_file} {victim_selection (fifo/greedy/cost-benefit} {device_size (GB)} {segment_size (MB)}
