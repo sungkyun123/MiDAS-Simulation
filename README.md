@@ -3,9 +3,9 @@
 ## What is MiDAS?
 MiDAS is a Migration-based Data placement technique with Adaptive group number and Size configuration for log-structured systems.
 
-MiDAS is implemented in both **trace-driven simulation** and a **real SSD prototype**. The simulator is used to quickly evaluate WAF of the GC techniques. Also, we used a real SSD prototype to measure I/O performance and the overheads associated with the CPU and memory for system execution. You can check the MiDAS's code for the real SSD prototype in the following link (https://github.com/dgist-datalab/MiDAS). 
+MiDAS is implemented in both **trace-driven simulation** and a **real SSD prototype**. The simulator is used to evaluate the WAF of the GC techniques quickly. Also, we used a real SSD prototype to measure I/O performance and the overheads associated with the CPU and memory for system execution. You can check the MiDAS's code for the real SSD prototype in the following link (https://github.com/dgist-datalab/MiDAS). 
 
-The original paper that introduced MiDAS is currently in the revision stage of [USENIX FAST 2024](https://www.usenix.org/conference/fast24).
+The original paper introducing MiDAS is currently in the revision stage of [USENIX FAST 2024](https://www.usenix.org/conference/fast24).
 
 The archive snapshot with a detailed screencast used in the paper is available at ~~link~~ (not available until Feb 27, 2024).
 
@@ -16,11 +16,11 @@ You can evaluate the WAF of MiDAS with the simulator and trace files.
 
 
 ### Prerequisites
-The hardware/software requirements for executing MiDAS are as followed.
+The hardware/software requirements for executing MiDAS are as follows.
 
 
 #### Hardware
-* `DRAM`: Simulation does not require large DRAM capacity. You need 1% of simulated device size for the data structures of MiDAS and the metadata of the device (e.g., L2P mapping table, OOB, invalid/valid bitmap) to test the trace files. For example, you need about 1.3GB size of DRAM to run trace file with 128GB device size.
+* `DRAM`: Simulation does not require a large DRAM capacity. You need 1% of the simulated device size for the data structures of MiDAS and the metadata of the device (e.g., L2P mapping table, OOB, invalid/valid bitmap) to test the trace files. For example, you need about 1.3GB size of DRAM to run a trace file with a 128GB device size.
 
 
 #### Software
@@ -28,7 +28,7 @@ There are no special software requirements to run the simulation.
 
 
 ### Installation & Compilation
-* Clone required reopsitory (MiDAS SSD prototype) into your host machine.
+* Clone required repository (MiDAS SSD prototype) into your host machine.
 ```
 $ git clone git@github.com:sungkyun123/MiDAS-Simulation.git
 $ cd MiDAS
@@ -41,7 +41,7 @@ $ wget https://zenodo.org/record/10409599/files/test-fio-small
 
 
 ### Compile & Execution
-After downloading trace file, you can test MiDAS. This experiment may be finished in 5 minutes by your server environment. The trace file is suitable for 8GB device. 
+After downloading the trace file, you can test MiDAS. This experiment may be finished in 5 minutes by your server environment. The trace file is suitable for 8GB devices. 
 If you want to test MiDAS on the real SSD prototype, go to the following link: https://github.com/dgist-datalab/MiDAS/
 
 * Smaller FIO Zipfian 1.0 workload (filename: test-fio-small)
@@ -52,21 +52,21 @@ $ ./ssdsimul {trace_file} {victim_selection (fifo/greedy/cost-benefit} {device_s
 ```
 
 ### Some statements for code structure
-MiDAS algorithm is implemented in followed files.
+MiDAS algorithm is implemented in the following files.
 This includes UID, MCAM, GCS, and hot block separation algorithms.
-- `algorithm.cpp`     : adaptably change group cofiguration, and check irregular pattern
+- `algorithm.cpp`     : adaptably change group cofiguration and check irregular pattern
 - `model.cpp`     : UID, MCAM, and GCS algorithm
 - `hf.cpp`        : Hot block separation
 
 
 ### Results
-During the experiment, you can see that MiDAS adaptably change the group configuration.
+During the experiment, you can see that MiDAS adaptably changes the group configuration.
 
 
 * UID information : When you run MiDAS, You can see the simulation setup and the parameters of the UID at the beginning.
-We sample a subset of LBA for timestamp monitoring, with a sampling rate of 0.01.
-We use a coarse-grained update interval unit of 0.25 segments and epoch lengths of 4x of the storage capacity (128GB).
-Following result is an example.
+We sample a subset of LBA for timestamp monitoring with a sampling rate of 0.01.
+We use a coarse-grained update interval unit of 0.25 segments and epoch lengths that are 4x the storage capacity (128GB).
+The following result is an example.
 
 ```
 ======================SIMULATION SETUP=====================
@@ -99,7 +99,7 @@ GROUP 5[1712]: 0.9146 (ERASE: 1988)  (Q size: 1712) (desig_size: 1712)
 ```
 
 
-* When an epoch is over, GCS algorithm finds the best group configuration using UID and MCAM. The group configuration is shown as follows.
+* When an epoch is over, the GCS algorithm finds the best group configuration using UID and MCAM. The group configuration is shown as follows.
 
 ```
 *****MODEL PREDICTION RESULTS*****
@@ -116,7 +116,7 @@ Used traffic (CALC) : 0.702
 ```
 
 
-* MiDAS periodically check the irregular pattern of the workload. If there is a group that its valid ratio prediction is wrong, MiDAS gives up on adjusting group sizes for all groups beyond the group and simply merges the groups.
+* MiDAS periodically checks the irregular pattern of the workload. If there is a group whose valid ratio prediction is wrong, MiDAS gives up on adjusting group sizes for all groups beyond the group and simply merges the groups.
 
 ```
 **Error comparing function**
@@ -128,7 +128,7 @@ Used traffic (CALC) : 0.702
 ```
 
 
-* When the excution is over, You can check the total user-write, GC-write, WAF, and the average valid data ratio of each group on the MiDAS simulation.
+* When the execution is over, You can check the total user-write, GC-write, WAF, and the average valid data ratio of each group on the MiDAS simulation.
 ```
  Experimental result
 ============================================
