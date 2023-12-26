@@ -44,11 +44,12 @@ $ wget https://zenodo.org/record/10409599/files/test-fio-small
 After downloading the trace file, you can test MiDAS. This experiment may be finished in 5 minutes by your server environment. The trace file is suitable for 8GB devices. 
 If you want to test MiDAS on the real SSD prototype, go to the following link: https://github.com/dgist-datalab/MiDAS/
 
-* Smaller FIO Zipfian 1.0 workload (filename: test-fio-small)
+* FIO Zipfian 1.0 workload (filename: test-fio-small)
    * You need about 80MB size of DRAM to test this trace file.
+   * You can execute the simulation as follows: ./ssdsimul {trace_file_path} {victim_selection (fifo/greedy/cost-benefit} {device_size (GB)} {segment_size (MB)}
 ```
 $ make clean; make
-$ ./ssdsimul {trace_file} {victim_selection (fifo/greedy/cost-benefit} {device_size (GB)} {segment_size (MB)}
+$ ./ssdsimul test-fio-small cost-benefit 8 4
 ```
 
 ### Some statements for code structure
